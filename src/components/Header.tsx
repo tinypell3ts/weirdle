@@ -1,7 +1,7 @@
+import { ConnectButton } from "@openformat/react";
 import { APP_NAME, ModalKind } from "stores/game/constants";
-
 import { IconButton } from "./Button";
-import { BarChartIcon, CogIcon, HelpIcon } from "./icons";
+import { BarChartIcon, HelpIcon } from "./icons";
 
 type Props = {
   onIconClick(modalKind: ModalKind): void;
@@ -23,10 +23,9 @@ export default function Header(props: Props) {
           <IconButton onClick={props.onIconClick.bind(null, "stats")}>
             <BarChartIcon />
           </IconButton>
-          <IconButton onClick={props.onIconClick.bind(null, "settings")}>
-            <CogIcon />
-          </IconButton>
         </div>
+
+        <ConnectButton />
       </div>
     </header>
   );
