@@ -1,18 +1,16 @@
-import { useEffect } from "react";
-import { toast, TypeOptions } from "react-toastify";
-import Head from "next/head";
-import type { AppProps } from "next/app";
-import clsx from "clsx";
 import { XIcon } from "@heroicons/react/solid";
-
-import "react-toastify/dist/ReactToastify.min.css";
-
-import "../styles/globals.css";
-
+import { Chains, OpenFormatProvider } from "@openformat/react";
+import clsx from "clsx";
+import { AnimatePresence } from "framer-motion";
 import tw from "lib/tw";
 import { capitalize } from "lib/utils";
+import type { AppProps } from "next/app";
+import Head from "next/head";
+import { useEffect } from "react";
+import { toast, TypeOptions } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 import { APP_NAME } from "stores/game/constants";
-import { AnimatePresence } from "framer-motion";
+import "../styles/globals.css";
 
 const contextClass: Record<TypeOptions, string> = {
   success: tw`ring-2 ring-blue-600 text-blue-600 bg-blue-50`,
@@ -42,7 +40,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>{capitalize(APP_NAME)}</title>
       </Head>
       <AnimatePresence>
-        <Component {...pageProps} />
+        <OpenFormatProvider
+          config={{
+            networks: [Chains.polygonMumbai],
+            appId: process.env.NEXT_PUBLIC_APPLICATION_ID as string,
+          }}
+        >
+          <Component {...pageProps} />
+        </OpenFormatProvider>
       </AnimatePresence>
     </>
   );
